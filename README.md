@@ -6,7 +6,10 @@ Proyecto desarrollado para el **Challenge Alura Agente**, del programa **ONE AI 
 
 Este proyecto es un **agente inteligente** capaz de responder preguntas en lenguaje natural sobre el **programa de fidelización de Punto Canela**, una cafetería ficticia donde los clientes acumulan sellos escaneando un código QR en cada compra y obtienen un café gratis al completar 5 sellos.
 
-El agente utiliza una base de conocimiento en formato CSV (con preguntas y respuestas frecuentes sobre el programa, política de privacidad y términos y condiciones) para responder de forma automática a las dudas de los clientes.
+El agente utiliza una base de conocimiento en formato CSV (con preguntas y respuestas frecuentes sobre el programa, política de privacidad y términos y condiciones) para responder de forma automática a las dudas de los clientes.El agente utiliza una base de conocimiento en formato CSV...para responder de forma automática a las dudas de los clientes.
+## 🌐 Aplicación web en vivo
+
+Prueba el agente funcionando en línea aquí: **[Agente Punto Canela](https://challenge-alura-agente-punto-canela-agznofb4gu2nqrxsnhzi4s.streamlit.app)**
 
 ## 🏗️ Arquitectura de la solución
 
