@@ -15,39 +15,33 @@ El proyecto sigue una arquitectura simple de **recuperación de información (re
 1. **Base de conocimiento (CSV):** contiene pares de pregunta/respuesta sobre el programa de fidelización.
 2. **Vectorización (TF-IDF):** las preguntas de la base de conocimiento se convierten en vectores numéricos usando `TfidfVectorizer` de scikit-learn.
 3. **Comparación por similitud de coseno:** cuando el usuario hace una pregunta, esta también se convierte en vector y se compara contra todas las preguntas de la base de conocimiento.
-4. **Selección de la mejor respuesta:** el agente devuelve la respuesta correspondiente a la pregunta más parecida (mayor similitud). Si ninguna pregunta es lo suficientemente parecida (por debajo de un umbral de confianza), el agente indica que no tiene información sobre ese tema, evitando respuestas inventadas.Pregunta del usuario
-│
-▼
-Vectorización TF-IDF
-│
-▼
-Similitud de coseno contra la base de conocimiento
-│
-▼
-¿Similitud > umbral?
-│             │
-Sí            No
-│             │
-▼             ▼
-Respuesta    "No tengo información
-del CSV       sobre eso todavía"## 🛠️ Tecnologías y herramientas utilizadas
+4. **Selección de la mejor respuesta:** el agente devuelve la respuesta correspondiente a la pregunta más parecida (mayor similitud). Si ninguna pregunta es lo suficientemente parecida (por debajo de un umbral de confianza), el agente indica que no tiene información sobre ese tema, evitando respuestas inventadas.
+
+**Flujo del proceso:**
+1. El usuario hace una pregunta
+2. Se vectoriza con TF-IDF
+3. Se calcula la similitud de coseno contra la base de conocimiento
+4. Si la similitud supera el umbral → se devuelve la respuesta del CSV
+5. Si no supera el umbral → se devuelve el mensaje "No tengo información sobre eso todavía"
+
+## 🛠️ Tecnologías y herramientas utilizadas
 
 - **Python 3**
 - **pandas** — carga y manejo de la base de conocimiento (CSV)
 - **scikit-learn** — vectorización TF-IDF y cálculo de similitud de coseno
 - **Google Colab** — entorno de desarrollo y pruebas
-- **Oracle Cloud Infrastructure (OCI)** — despliegue de la aplicación en la nube
+- **Oracle Cloud Infrastructure (OCI)** — despliegue y ejecución de la aplicación en la nube (Cloud Shell)
 
 ## ▶️ Instrucciones para ejecutar el proyecto
 
 ### Opción 1: Google Colab (recomendado)
 1. Abre [Google Colab](https://colab.research.google.com/)
-2. Sube el archivo `punto_canela_base_conocimiento.csv` a tu entorno
+2. Sube el archivo `punto_canela_base_conocimiento.csv`
 3. Copia y pega el contenido de `agente_punto_canela.py` en una celda
 4. Ejecuta la celda con el botón ▶️
 5. El agente probará automáticamente algunas preguntas de ejemplo
 
-### Opción 2: Localmente
+### Opción 2: Localmente o en OCI Cloud Shell
 1. Clona este repositorio:
 ```bash
    git clone https://github.com/MarSierraS/challenge-alura-agente-punto-canela.git
@@ -59,7 +53,7 @@ del CSV       sobre eso todavía"## 🛠️ Tecnologías y herramientas utilizad
 ```
 3. Ejecuta el script:
 ```bash
-   python agente_punto_canela.py
+   python3 agente_punto_canela.py
 ```
 
 ## 💬 Ejemplos de preguntas que el agente puede responder
@@ -75,7 +69,7 @@ del CSV       sobre eso todavía"## 🛠️ Tecnologías y herramientas utilizad
 ## 📝 Ejemplos de respuestas generadas por el agente
 
 **Pregunta:** ¿Cómo funciona lo del café gratis?
-**Respuesta:** Al alcanzar 5 sellos, muestra tu código QR en caja y selecciona la opción de canje antes de realizar tu siguiente pedido.
+**Respuesta:** El café gratis aplica para bebidas de café estándar en tamaño mediano; bebidas especiales o de temporada pueden tener un costo adicional.
 
 **Pregunta:** ¿Cuánto tengo que gastar para ganar un sello?
 **Respuesta:** El monto mínimo de compra para obtener un sello es de $100 pesos.
@@ -85,14 +79,25 @@ del CSV       sobre eso todavía"## 🛠️ Tecnologías y herramientas utilizad
 
 ## ☁️ Despliegue en OCI
 
-*(Sección a completar con el enlace público de la aplicación desplegada y captura de pantalla como evidencia)*
+El agente fue ejecutado y probado directamente dentro de **Oracle Cloud Infrastructure**, utilizando **OCI Cloud Shell** (terminal en la nube integrada en la consola de OCI), como evidencia de que la solución corre exitosamente en la infraestructura de Oracle Cloud.
 
-- **Enlace de la aplicación:** _pendiente_
-- **Captura de pantalla:** _pendiente_
+**Pasos realizados:**
+1. Se creó una cuenta gratuita (Always Free) en OCI.
+2. Se accedió a **OCI Cloud Shell** desde la consola.
+3. Se subieron los archivos del proyecto (`agente_punto_canela.py` y `punto_canela_base_conocimiento.csv`).
+4. Se instalaron las dependencias necesarias (`pandas`, `scikit-learn`).
+5. Se ejecutó el agente directamente en el entorno de OCI, obteniendo respuestas correctas a las preguntas de prueba.
+
+**Captura de pantalla (evidencia):**
+
+![Agente corriendo en OCI Cloud Shell](evidencia_deploy_oci.png)
+
+*La captura muestra el agente cargando la base de conocimiento (28 preguntas y respuestas) y respondiendo correctamente dentro de la sesión de OCI Cloud Shell (región mx-queretaro-1).*
 
 ## 📁 Estructura del repositoriochallenge-alura-agente-punto-canela/
 ├── README.md                              # Este archivo
 ├── agente_punto_canela.py                 # Código del agente inteligente
-└── punto_canela_base_conocimiento.csv     # Base de conocimiento (preguntas y respuestas)## 👤 Autora
+├── punto_canela_base_conocimiento.csv     # Base de conocimiento (preguntas y respuestas)
+└── evidencia_deploy_oci.png               # Captura del agente corriendo en OCI## 👤 Autora
 
 Proyecto desarrollado como parte del programa **ONE AI for Tech** (Grupo 10) - Oracle & Alura Latam.
